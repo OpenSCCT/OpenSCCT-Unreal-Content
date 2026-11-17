@@ -1,0 +1,4 @@
+# Cook output, staging and archives: never committed (the archives are release assets).
+/staging/
+__pycache__/
+*.pyc

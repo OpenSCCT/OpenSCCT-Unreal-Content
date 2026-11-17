@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Lumbridge/OpenSCCT-Unreal-Content/main/schema/index.schema.json",
+  "title": "OpenSCCT-Unreal-Content index",
+  "description": "index.json: every cooked Unreal pack the OpenSCCT Unreal client can download (docs/FORMAT.md). Clients ignore fields they do not know.",
+  "type": "object",
+  "required": ["format", "formatVersion", "updated", "cooks", "shared", "maps"],
+  "properties": {
+    "format": { "const": "openscct.unreal-content" },
+    "formatVersion": { "type": "integer", "minimum": 1 },
+    "updated": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$" },
+    "cooks": { "type": "array", "items": { "$ref": "#/$defs/cook" } },
+    "shared": { "type": "array", "items": { "$ref": "#/$defs/shared" } },
+    "maps": { "type": "array", "items": { "$ref": "#/$defs/map" } }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "download": {
+      "type": "object",
+      "required": ["url", "size", "sha256"],
+      "properties": {
+        "url": { "type": "string", "pattern": "^https://github\\.com/Lumbridge/OpenSCCT-Unreal-Content/releases/download/[^/]+/[A-Za-z0-9._-]+\\.zip$" },
+        "size": { "type": "integer", "minimum": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "cook": {
+      "type": "object",
+      "required": ["id", "engine", "game", "commit", "platform"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[0-9.]+-[0-9.]+-\\d+$" },
+        "engine": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "game": { "type": "string" },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "platform": { "enum": ["Windows"] }
+      }
+    },
+    "shared": {
+      "type": "object",
+      "required": ["id", "title", "cook", "version", "download"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "title": { "type": "string" },
+        "cook": { "type": "string" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "treeSha256": { "$ref": "#/$defs/sha256" },
+        "download": { "$ref": "#/$defs/download" }
+      }
+    },
+    "map": {
+      "type": "object",
+      "required": ["id", "code", "cook", "version", "contentHash", "level", "requires", "download"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^(stock|original|community|enhanced|recovered|ports)/[^/]+$" },
+        "code": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "title": { "type": "string" },
+        "cook": { "type": "string" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "contentHash": { "type": "string", "pattern": "^[0-9a-f]{16}$" },
+        "level": { "type": "string", "pattern": "^/Game/[A-Za-z0-9_/]+$" },
+        "requires": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+        "treeSha256": { "$ref": "#/$defs/sha256" },
+        "download": { "$ref": "#/$defs/download" }
+      }
+    }
+  }
+}
