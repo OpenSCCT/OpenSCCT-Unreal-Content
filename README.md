@@ -4,7 +4,7 @@ Cooked map content for the Unreal client of OpenSCCT: each map's Unreal level wi
 (meshes, textures, materials, lights, effects, sounds), cooked for Windows so the game can download it and play the map
 without importing it with the editor.
 
-This repository works alongside [OpenSCCT-Content](https://github.com/Lumbridge/OpenSCCT-Content), which holds the
+This repository works alongside [OpenSCCT-Content](https://github.com/OpenSCCT/OpenSCCT-Content), which holds the
 converted maps in OpenSCCT's own formats. The two split the work:
 
 | Repository | What a map download brings | Who needs it |
@@ -15,9 +15,14 @@ converted maps in OpenSCCT's own formats. The two split the work:
 The Unreal client downloads both for a map. It links them by the map's `id` and by the simulation's `contentHash`,
 so the level it draws always matches the simulation it plays.
 
+See the [OpenSCCT project directory](https://github.com/OpenSCCT/OpenSCCT) for the original PS2,
+PC/Steam and modern Unreal editions. To contribute a cooked level, start with the
+[Unreal client](https://github.com/OpenSCCT/OpenSCCT-Unreal) and follow the
+[cook and publish guide](docs/PUBLISHING.md) for this catalog.
+
 ## What is here
 
-The paks are ZIP archives attached to this repository's [releases](https://github.com/Lumbridge/OpenSCCT-Unreal-Content/releases)
+The paks are ZIP archives attached to this repository's [releases](https://github.com/OpenSCCT/OpenSCCT-Unreal-Content/releases)
 (`unreal-content-<date>`). The tree holds only:
 
 | Path | What |

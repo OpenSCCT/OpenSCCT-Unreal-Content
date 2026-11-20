@@ -1,14 +1,14 @@
 # Format
 
 What the Unreal client of OpenSCCT reads from this repository and what it downloads. The design follows
-[OpenSCCT-Content's format](https://github.com/Lumbridge/OpenSCCT-Content/blob/main/docs/FORMAT.md): the tree holds
+[OpenSCCT-Content's format](https://github.com/OpenSCCT/OpenSCCT-Content/blob/main/docs/FORMAT.md): the tree holds
 only the index, the packs are GitHub Release assets, and older releases stay so a player can keep a pack until the
 index moves on.
 
 ## The index
 
 `index.json` on `main`, fetched raw:
-`https://raw.githubusercontent.com/Lumbridge/OpenSCCT-Unreal-Content/main/index.json`.
+`https://raw.githubusercontent.com/OpenSCCT/OpenSCCT-Unreal-Content/main/index.json`.
 `schema/index.schema.json` is its JSON Schema.
 
 ```json
@@ -32,7 +32,7 @@ index moves on.
       "cook": "5.8.4-0.8.161-1",
       "version": "1.0.0",
       "treeSha256": "<sha256 of the pack's file list>",
-      "download": { "url": "https://github.com/Lumbridge/OpenSCCT-Unreal-Content/releases/download/<tag>/shared-imported-shared-1.0.0.zip",
+      "download": { "url": "https://github.com/OpenSCCT/OpenSCCT-Unreal-Content/releases/download/<tag>/shared-imported-shared-1.0.0.zip",
                     "size": 123456789, "sha256": "<sha256 of the zip>" }
     }
   ],
@@ -47,7 +47,7 @@ index moves on.
       "level": "/Game/Imported/Maps/AquaE/L_AquaE",
       "requires": ["imported-shared"],
       "treeSha256": "<sha256 of the pack's file list>",
-      "download": { "url": "https://github.com/Lumbridge/OpenSCCT-Unreal-Content/releases/download/<tag>/stock-AquaE-1.0.0.zip",
+      "download": { "url": "https://github.com/OpenSCCT/OpenSCCT-Unreal-Content/releases/download/<tag>/stock-AquaE-1.0.0.zip",
                     "size": 23456789, "sha256": "<sha256 of the zip>" }
     }
   ]
