@@ -1,24 +1,9 @@
-# Publishing
+# Unreal map packaging
 
-How the paks are cooked and published. The tooling is being built in OpenSCCT-Unreal; this page is the plan it
-follows and will name the exact commands once they exist.
+Players build the stock Versus content from their own Steam installation. Approved community-created maps are distributed as reviewed source recipes that can use those local assets. The [community catalogue](https://github.com/OpenSCCT/OpenSCCT-Content/blob/main/community.json) lists the current recipes, including file digests and source revisions.
 
-You need:
+## Inspect a local cook
 
-- an OpenSCCT-Unreal checkout at the commit to cook from, built, with the maps imported (`Tools/Import/Import-Map.ps1`
-  and the README's asset steps) from the same OpenSCCT-Content packs the index's `contentHash` values name
-- Unreal Engine at the version the cook names
-- the GitHub CLI (`gh`, logged in with push access to this repository)
+Use a matching Unreal client checkout and engine version. Build the SVMap locally, then use the client repository's [map pak guide](https://github.com/OpenSCCT/OpenSCCT-Unreal/blob/main/docs/MAP-PAKS.md) to cook and inspect it. Keep generated containers under `Saved/MapPaks/` in that checkout and packaging inputs under this repository's ignored `staging/` directory.
 
-Steps:
-
-1. **Cook.** OpenSCCT-Unreal cooks the shared imported content into one IoStore container and each map's level
-   (with what only it uses) into its own, using Unreal's chunk assignment so a map's pack holds nothing a shared
-   pack already has. Cooking runs headless.
-2. **Pack.** Each container goes into a ZIP as `docs/FORMAT.md` describes; the tool writes the index entries
-   (sizes, hashes, tree hashes, cook id, the map's `contentHash`).
-3. **Publish.** One GitHub release `unreal-content-<date>` per publish with every archive attached, then the new
-   `index.json` committed to `main`.
-4. **Check.** The tool downloads the index and every archive it names and checks the hashes.
-
-`staging/` (ignored by git) holds the cook output and the archives.
+Historical cook indices link a map ID and SVMap simulation hash to a cooked Unreal level. The [format](FORMAT.md) describes those fields and the Windows container layout. Local cooks can contain original meshes, textures, audio or effects from the player's game. A map author who wants to offer an optional download should submit the community-created source files and attribution through the community catalogue.

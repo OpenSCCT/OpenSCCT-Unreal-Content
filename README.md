@@ -1,36 +1,19 @@
-# OpenSCCT-Unreal-Content
+# OpenSCCT Unreal Content
 
-Cooked map content for the Unreal client of OpenSCCT: each map's Unreal level with everything it draws and plays
-(meshes, textures, materials, lights, effects, sounds), cooked for Windows so the game can download it and play the map
-without importing it with the editor.
+This repository documents the Unreal IoStore packaging format and tools for local development cooks. In the [OpenSCCT project directory](https://github.com/OpenSCCT), Godot and Unreal are **Modernisations**. The PS2 disc and original PC/Steam game are **Originals**.
 
-This repository works alongside [OpenSCCT-Content](https://github.com/OpenSCCT/OpenSCCT-Content), which holds the
-converted maps in OpenSCCT's own formats. The two split the work:
+## Playing and editing maps
 
-| Repository | What a map download brings | Who needs it |
-| --- | --- | --- |
-| OpenSCCT-Content | the map's svmap pack: `manifest.json` and `sim/` (what the simulation and servers read) | every client, dedicated servers, the hub |
-| OpenSCCT-Unreal-Content (here) | the map's cooked Unreal level | the Unreal client only |
+Prepare your installed Steam copy of Splinter Cell Chaos Theory in the launcher. The [Unreal modernisation](https://master.lumbridge.co.uk/projects/unreal), [Godot modernisation](https://master.lumbridge.co.uk/projects/godot) and [OpenSCCT Editor](https://github.com/OpenSCCT/OpenSCCT-Editor) use the locally built Versus maps and shared assets. The Steam-supplied maps form the starting roster. Additional public downloads are limited to approved community-created map content. The launcher can convert a community map source with the player's own stock assets.
 
-The Unreal client downloads both for a map. It links them by the map's `id` and by the simulation's `contentHash`,
-so the level it draws always matches the simulation it plays.
+## Local development cooks
 
-See the [OpenSCCT project directory](https://github.com/OpenSCCT/OpenSCCT) for the original PS2,
-PC/Steam and modern Unreal editions. To contribute a cooked level, start with the
-[Unreal client](https://github.com/OpenSCCT/OpenSCCT-Unreal) and follow the
-[cook and publish guide](docs/PUBLISHING.md) for this catalog.
+An SVMap contains the manifest and simulation. An optional cooked Unreal map contains an engine-specific presentation. The map ID and simulation content hash identify its compatible simulation. Keep local cooks that include retail meshes, textures or sounds on your own machine.
 
-## What is here
-
-The paks are ZIP archives attached to this repository's [releases](https://github.com/OpenSCCT/OpenSCCT-Unreal-Content/releases)
-(`unreal-content-<date>`). The tree holds only:
-
-| Path | What |
+| File | Purpose |
 | --- | --- |
-| [`index.json`](index.json) | Every pack: version, size, sha256, download URL, the cook it belongs to and the OpenSCCT-Content map it draws |
-| [`schema/index.schema.json`](schema/index.schema.json) | JSON Schema of the index |
-| [`docs/FORMAT.md`](docs/FORMAT.md) | The index and archive formats (the contract the Unreal client reads) |
-| [`docs/PUBLISHING.md`](docs/PUBLISHING.md) | How the paks are cooked and published |
-| [`tools/`](tools) | Packing, publishing and checking tools |
-
-Nothing is published yet: the index is empty until the first cook.
+| [Unreal map pak guide](https://github.com/OpenSCCT/OpenSCCT-Unreal/blob/main/docs/MAP-PAKS.md) | Cook and inspect a map in a development checkout |
+| [Cook catalogue](index.json) | Cook IDs and map packaging metadata |
+| [Schema](schema/index.schema.json) | Catalogue validation |
+| [Archive format](docs/FORMAT.md) | Unreal archive layout |
+| [Packaging tools](tools/) | Local archive preparation and verification |
